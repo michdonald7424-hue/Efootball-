@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eFootball Hub</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#070b12;
+    color:#fff;
+    min-height:100vh;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    height:70px;
+    background:#0c121c;
+    border-bottom:1px solid #202b3b;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#18d66b;
+}
+
+.logo-ball{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#18d66b,#087a3c);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.user-name{
+    color:#aeb9c9;
+    font-size:14px;
+}
+
+.login-btn{
+    border:none;
+    background:#18d66b;
+    color:#041008;
+    padding:11px 18px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:70px;
+    width:230px;
+    height:calc(100vh - 70px);
+    background:#0a1019;
+    border-right:1px solid #202b3b;
+    padding:18px 12px;
+    overflow-y:auto;
+}
+
+.nav-title{
+    color:#65748a;
+    font-size:11px;
+    font-weight:bold;
+    margin:14px 10px 8px;
+    text-transform:uppercase;
+}
+
+.nav-btn{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#aeb9c9;
+    padding:12px 13px;
+    border-radius:8px;
+    text-align:left;
+    margin-bottom:4px;
+    font-size:14px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:#13251d;
+    color:#18d66b;
+}
+
+.mobile-menu{
+    display:none;
+}
+
+/* ================= MAIN ================= */
+
+main{
+    margin-left:230px;
+    padding:25px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.page-subtitle{
+    color:#8290a4;
+    margin-bottom:25px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:300px;
+    border-radius:18px;
+    padding:35px;
+    background:
+        linear-gradient(90deg,rgba(4,8,14,.97),rgba(4,8,14,.62)),
+        url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1400&q=80");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    border:1px solid #263345;
+    overflow:hidden;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#143622;
+    color:#18d66b;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    color:#bdc7d5;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.primary{
+    background:#18d66b;
+    color:#041008;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.secondary{
+    background:#182230;
+    color:#fff;
+    border:1px solid #2d3a4d;
+    padding:12px 18px;
+    border-radius:8px;
+    font-weight:bold;
+    margin-left:8px;
+}
+
+/* ================= CARDS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin:22px 0;
+}
+
+.stat-card,
+.card{
+    background:#0d151f;
+    border:1px solid #202d3e;
+    border-radius:13px;
+    padding:18px;
+}
+
+.stat-icon{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.stat-number{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.stat-label{
+    color:#7f8ca0;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.section{
+    margin-top:25px;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.section-head h2{
+    font-size:19px;
+}
+
+/* ================= TOURNAMENTS ================= */
+
+.tournament-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.tournament-card{
+    background:#0d151f;
+    border:1px solid #202d3e;
+    border-radius:13px;
+    overflow:hidden;
+}
+
+.tournament-img{
+    height:130px;
+    background-size:cover;
+    background-position:center;
+}
+
+.tournament-body{
+    padding:16px;
+}
+
+.tournament-body h3{
+    margin-bottom:9px;
+}
+
+.tournament-info{
+    color:#8996a8;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.tournament-status{
+    color:#18d66b;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.tournament-body button{
+    width:100%;
+    margin-top:12px;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th,td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid #202b3b;
+}
+
+th{
+    color:#718096;
+    font-size:12px;
+    text-transform:uppercase;
+}
+
+td{
+    font-size:14px;
+}
+
+.rank{
+    color:#18d66b;
+    font-weight:bold;
+}
+
+/* ================= SQUAD ================= */
+
+.pitch{
+    position:relative;
+    max-width:850px;
+    height:520px;
+    margin:auto;
+    border-radius:18px;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #096936 0px,
+            #096936 52px,
+            #08713a 52px,
+            #08713a 104px
+        );
+    border:5px solid #dcebdc;
+    overflow:hidden;
+}
+
+.pitch::before{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:90px;
+    border:2px solid rgba(255,255,255,.7);
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    border-top:none;
+}
+
+.pitch::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border:2px solid rgba(255,255,255,.7);
+    border-radius:50%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+.player{
+    position:absolute;
+    width:100px;
+    text-align:center;
+    z-index:2;
+}
+
+.player-card{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    margin:auto;
+    background:linear-gradient(135deg,#d9b45a,#6e4c16);
+    border:3px solid #fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.player-name{
+    font-size:11px;
+    margin-top:5px;
+    font-weight:bold;
+    text-shadow:0 1px 3px #000;
+}
+
+.p1{left:50%;bottom:20px;transform:translateX(-50%);}
+.p2{left:18%;bottom:115px;}
+.p3{left:50%;bottom:120px;transform:translateX(-50%);}
+.p4{right:18%;bottom:115px;}
+.p5{left:30%;bottom:220px;}
+.p6{right:30%;bottom:220px;}
+.p7{left:10%;top:150px;}
+.p8{left:37%;top:130px;}
+.p9{right:37%;top:130px;}
+.p10{right:10%;top:150px;}
+.p11{left:50%;top:30px;transform:translateX(-50%);}
+
+/* ================= FORM ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    color:#9ca9ba;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #2a3749;
+    background:#080e16;
+    color:white;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#18d66b;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:#0d151f;
+    border:1px solid #29384b;
+    border-radius:15px;
+    width:100%;
+    max-width:480px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:17px;
+    top:13px;
+    border:none;
+    background:none;
+    color:#8996a8;
+    font-size:23px;
+}
+
+/* ================= LOGIN ================= */
+
+.auth{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        linear-gradient(rgba(3,7,12,.88),rgba(3,7,12,.94)),
+        url("https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=1400&q=80");
+    background-size:cover;
+    padding:20px;
+}
+
+.auth-box{
+    width:100%;
+    max-width:430px;
+    background:#0c141e;
+    border:1px solid #29384b;
+    border-radius:18px;
+    padding:30px;
+}
+
+.auth-logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.auth-logo div{
+    font-size:30px;
+    font-weight:900;
+}
+
+.auth-logo span{
+    color:#18d66b;
+}
+
+.auth-tabs{
+    display:flex;
+    margin-bottom:20px;
+}
+
+.auth-tab{
+    flex:1;
+    padding:11px;
+    background:#121d29;
+    border:none;
+    color:#8d9aac;
+}
+
+.auth-tab.active{
+    color:#18d66b;
+    border-bottom:2px solid #18d66b;
+}
+
+/* ================= COINS ================= */
+
+.coin-box{
+    text-align:center;
+    padding:35px;
+}
+
+.coin{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ffe47a,#b77b00);
+    color:#5b3b00;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 18px;
+    font-size:35px;
+    font-weight:bold;
+    border:5px solid #f4cf56;
+}
+
+.coin-count{
+    font-size:35px;
+    font-weight:900;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .tournament-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:750px){
+
+    header{
+        padding:0 15px;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .mobile-menu{
+        display:block;
+        border:none;
+        background:#162131;
+        color:white;
+        padding:9px 12px;
+        border-radius:7px;
+    }
+
+    main{
+        margin-left:0;
+        padding:15px;
+    }
+
+    .hero{
+        padding:25px;
+        min-height:350px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .tournament-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .pitch{
+        height:450px;
+    }
+
+    .user-name{
+        display:none;
+    }
+}
+
+@media(max-width:420px){
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN SCREEN ================= -->
+
+<div id="authScreen" class="auth">
+
+<div class="auth-box">
+
+<div class="auth-logo">
+<div>e<span>FOOTBALL</span></div>
+<small style="color:#7d8b9d;">COMMUNITY HUB</small>
+</div>
+
+<div class="auth-tabs">
+<button class="auth-tab active" onclick="showLogin()">LOGIN</button>
+<button class="auth-tab" onclick="showSignup()">SIGN UP</button>
+</div>
+
+<div id="loginForm">
+
+<div class="form-group">
+<label>Email</label>
+<input id="loginEmail" type="email" placeholder="Enter your email">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input id="loginPassword" type="password" placeholder="Enter password">
+</div>
+
+<button class="primary" style="width:100%;" onclick="login()">LOGIN</button>
+
+<p id="loginMessage" style="margin-top:15px;text-align:center;color:#f0b34b;"></p>
+
+</div>
+
+<div id="signupForm" class="hidden">
+
+<div class="form-group">
+<label>Username</label>
+<input id="signupName" placeholder="eFootball username">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="signupEmail" type="email" placeholder="Email address">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input id="signupPassword" type="password" placeholder="Create password">
+</div>
+
+<button class="primary" style="width:100%;" onclick="signup()">CREATE ACCOUNT</button>
+
+<p id="signupMessage" style="margin-top:15px;text-align:center;color:#18d66b;"></p>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="app" class="hidden">
+
+<header>
+
+<div style="display:flex;align-items:center;gap:12px;">
+<button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+
+<div class="logo">
+<div class="logo-ball">⚽</div>
+e<span>FOOTBALL</span> HUB
+</div>
+</div>
+
+<div class="header-right">
+<span id="headerUser" class="user-name"></span>
+<button class="login-btn" onclick="logout()">Logout</button>
+</div>
+
+</header>
+
+
+<aside id="sidebar" class="sidebar">
+
+<div class="nav-title">Main</div>
+
+<button class="nav-btn active" onclick="openPage('home',this)">🏠 Home</button>
+<button class="nav-btn" onclick="openPage('tournaments',this)">🏆 Tournaments</button>
+<button class="nav-btn" onclick="openPage('scores',this)">📊 Scores</button>
+<button class="nav-btn" onclick="openPage('rankings',this)">📈 Rankings</button>
+
+<div class="nav-title">eFootball Tools</div>
+
+<button class="nav-btn" onclick="openPage('squad',this)">👥 Squad Builder</button>
+<button class="nav-btn" onclick="openPage('manager',this)">🧠 Manager & Tactics</button>
+<button class="nav-btn" onclick="openPage('multiplayer',this)">🎮 1v1 Multiplayer</button>
+
+<div class="nav-title">Rewards</div>
+
+<button class="nav-btn" onclick="openPage('coins',this)">🪙 Coins & Rewards</button>
+
+<div class="nav-title">Account</div>
+
+<button class="nav-btn" onclick="openPage('profile',this)">👤 My Profile</button>
+<button class="nav-btn" onclick="openPage('admin',this)">⚙️ Admin Panel</button>
+
+</aside>
+
+
+<main>
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<div class="hero-content">
+
+<div class="badge">⚡ eFOOTBALL COMMUNITY</div>
+
+<h1>Play. Compete. Dominate.</h1>
+
+<p>
+Your home for eFootball tournaments, 1v1 competitions,
+squad building, rankings, scores and community events.
+</p>
+
+<button class="primary" onclick="openPageById('tournaments')">
+Join Tournament
+</button>
+
+<button class="secondary" onclick="openPageById('squad')">
+Build Squad
+</button>
+
+</div>
+</div>
+
+
+<div class="stats">
+
+<div class="stat-card">
+<div class="stat-icon">🏆</div>
+<div class="stat-number" id="statTournaments">8</div>
+<div class="stat-label">Active Tournaments</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">👥</div>
+<div class="stat-number">1,284</div>
+<div class="stat-label">Registered Players</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🎮</div>
+<div class="stat-number">342</div>
+<div class="stat-label">Matches Played</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🪙</div>
+<div class="stat-number">25K+</div>
+<div class="stat-label">Coins Distributed</div>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-head">
+<h2>🔥 Featured Tournaments</h2>
+<button class="secondary" onclick="openPageById('tournaments')">View All</button>
+</div>
+
+<div class="tournament-grid">
+
+<div class="tournament-card">
+<div class="tournament-img"
+style="background-image:url('https://images.unsplash.com/photo-1556056504-5c7696c4c28d?auto=format&fit=crop&w=800&q=80')"></div>
+
+<div class="tournament-body">
+<div class="tournament-status">● REGISTRATION OPEN</div>
+<h3>eFootball Champions Cup</h3>
+<div class="tournament-info">
+👥 32 Players<br>
+🪙 Prize: 5,000 Coins<br>
+📅 Saturday
+</div>
+<button class="primary" onclick="registerTournament('eFootball Champions Cup')">Register</button>
+</div>
+</div>
+
+
+<div class="tournament-card">
+<div class="tournament-img"
+style="background-image:url('https://images.unsplash.com/photo-1518600506278-4e8ef466b810?auto=format&fit=crop&w=800&q=80')"></div>
+
+<div class="tournament-body">
+<div class="tournament-status">● REGISTRATION OPEN</div>
+<h3>1v1 Night League</h3>
+<div class="tournament-info">
+👥 16 Players<br>
+🪙 Prize: 2,500 Coins<br>
+📅 Friday
+</div>
+<button class="primary" onclick="registerTournament('1v1 Night League')">Register</button>
+</div>
+</div>
+
+
+<div class="tournament-card">
+<div class="tournament-img"
+style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=800&q=80')"></div>
+
+<div class="tournament-body">
+<div class="tournament-status">● OPEN</div>
+<h3>Weekend Masters</h3>
+<div class="tournament-info">
+👥 64 Players<br>
+🪙 Prize: 10,000 Coins<br>
+📅 Sunday
+</div>
+<button class="primary" onclick="registerTournament('Weekend Masters')">Register</button>
+</div>
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- ================= TOURNAMENTS ================= -->
+
+<section id="tournaments" class="page">
+
+<h1 class="page-title">🏆 Tournaments</h1>
+<p class="page-subtitle">Join eFootball competitions and fight for the top.</p>
+
+<div class="tournament-grid">
+
+<div class="tournament-card">
+<div class="tournament-img"
+style="background-image:url('https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=800&q=80')"></div>
+
+<div class="tournament-body">
+<div class="tournament-status">REGISTRATION OPEN</div>
+<h3>Champions Cup</h3>
+<div class="tournament-info">
+Format: 1v1<br>
+Players: 32<br>
+Entry: Free<br>
+Prize: 5,000 Coins
+</div>
+<button class="primary" onclick="registerTournament('Champions Cup')">Register Now</button>
+</div>
+</div>
+
+
+<div class="tournament-card">
+<div class="tournament-img"
+style="background-image:url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80')"></div>
+
+<div class="tournament-body">
+<div class="tournament-status">REGISTRATION OPEN</div>
+<h3>Elite League</h3>
+<div class="tournament-info">
+Format: League<br>
+Players: 20<br>
+Entry: 100 Coins<br>
+Prize: 7,500 Coins
+</div>
+<button class="primary" onclick="registerTournament('Elite League')">Register Now</button>
+</div>
+</div>
+
+
+<div class="tournament-card">
+<div class="tournament-img"
+style="background-image:url('https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80')"></div>
+
+<div class="tournament-body">
+<div class="tournament-status">COMING SOON</div>
+<h3>World Masters</h3>
+<div class="tournament-info">
+Format: Knockout<br>
+Players: 64<br>
+Entry: Free<br>
+Prize: 15,000 Coins
+</div>
+<button class="secondary" onclick="alert('Registration has not opened yet.')">Coming Soon</button>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SCORES ================= -->
+
+<section id="scores" class="page">
+
+<h1 class="page-title">📊 Scores & Results</h1>
+<p class="page-subtitle">Latest eFootball tournament results.</p>
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Match</th>
+<th>Player 1</th>
+<th>Score</th>
+<th>Player 2</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>#1024</td>
+<td>Shadow FC</td>
+<td><b>3 - 1</b></td>
+<td>King Messi</td>
+<td style="color:#18d66b;">Finished</td>
+</tr>
+
+<tr>
+<td>#1025</td>
+<td>Ronaldo Jr</td>
+<td><b>2 - 2</b></td>
+<td>Elite Boy</td>
+<td style="color:#18d66b;">Finished</td>
+</tr>
+
+<tr>
+<td>#1026</td>
+<td>Dream XI</td>
+<td><b>1 - 0</b></td>
+<td>Blue Warriors</td>
+<td style="color:#18d66b;">Finished</td>
+</tr>
+
+<tr>
+<td>#1027</td>
+<td>Golden FC</td>
+<td><b>—</b></td>
+<td>Power XI</td>
+<td style="color:#f0b34b;">Upcoming</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- ================= RANKINGS ================= -->
+
+<section id="rankings" class="page">
+
+<h1 class="page-title">📈 Player Rankings</h1>
+<p class="page-subtitle">Top players in the eFootball Hub community.</p>
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>Player</th>
+<th>Matches</th>
+<th>Wins</th>
+<th>Points</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td>Shadow FC</td>
+<td>28</td>
+<td>24</td>
+<td>720</td>
+</tr>
+
+<tr>
+<td class="rank">2</td>
+<td>King Messi</td>
+<td>31</td>
+<td>23</td>
+<td>690</td>
+</tr>
+
+<tr>
+<td class="rank">3</td>
+<td>Elite Boy</td>
+<td>26</td>
+<td>21</td>
+<td>650</td>
+</tr>
+
+<tr>
+<td class="rank">4</td>
+<td>Dream XI</td>
+<td>29</td>
+<td>19</td>
+<td>610</td>
+</tr>
+
+<tr>
+<td class="rank">5</td>
+<td>Golden FC</td>
+<td>25</td>
+<td>18</td>
+<td>580</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SQUAD ================= -->
+
+<section id="squad" class="page">
+
+<h1 class="page-title">👥 Squad Builder</h1>
+<p class="page-subtitle">Create and arrange your eFootball starting XI.</p>
+
+<div class="card">
+
+<div class="pitch">
+
+<div class="player p1">
+<div class="player-card">GK</div>
+<div class="player-name">GK</div>
+</div>
+
+<div class="player p2">
+<div class="player-card">LB</div>
+<div class="player-name">LB</div>
+</div>
+
+<div class="player p3">
+<div class="player-card">CB</div>
+<div class="player-name">CB</div>
+</div>
+
+<div class="player p4">
+<div class="player-card">RB</div>
+<div class="player-name">RB</div>
+</div>
+
+<div class="player p5">
+<div class="player-card">DMF</div>
+<div class="player-name">DMF</div>
+</div>
+
+<div class="player p6">
+<div class="player-card">CMF</div>
+<div class="player-name">CMF</div>
+</div>
+
+<div class="player p7">
+<div class="player-card">LWF</div>
+<div class="player-name">LWF</div>
+</div>
+
+<div class="player p8">
+<div class="player-card">AMF</div>
+<div class="player-name">AMF</div>
+</div>
+
+<div class="player p9">
+<div class="player-card">SS</div>
+<div class="player-name">SS</div>
+</div>
+
+<div class="player p10">
+<div class="player-card">RWF</div>
+<div class="player-name">RWF</div>
+</div>
+
+<div class="player p11">
+<div class="player-card">CF</div>
+<div class="player-name">CF</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= MANAGER ================= -->
+
+<section id="manager" class="page">
+
+<h1 class="page-title">🧠 Manager & Tactics</h1>
+<p class="page-subtitle">Choose your tactical setup.</p>
+
+<div class="form-grid">
+
+<div class="card">
+
+<h2 style="margin-bottom:18px;">Manager</h2>
+
+<div class="form-group">
+<label>Select Manager</label>
+
+<select>
+<option>Quick Counter Manager</option>
+<option>Possession Game Manager</option>
+<option>Long Ball Counter Manager</option>
+<option>Out Wide Manager</option>
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Playstyle</label>
+
+<select>
+<option>Quick Counter</option>
+<option>Possession Game</option>
+<option>Long Ball Counter</option>
+<option>Out Wide</option>
+</select>
+
+</div>
+
+<button class="primary" onclick="alert('Manager settings saved!')">
+Save Tactics
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2 style="margin-bottom:18px;">Formation</h2>
+
+<div class="form-group">
+<label>Formation</label>
+
+<select>
+<option>4-3-3</option>
+<option>4-2-3-1</option>
+<option>4-2-1-3</option>
+<option>4-3-1-2</option>
+<option>3-4-3</option>
+<option>5-3-2</option>
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Defensive Line</label>
+
+<input type="range" min="1" max="10" value="5">
+</div>
+
+<div class="form-group">
+<label>Attacking Style</label>
+
+<select>
+<option>Balanced</option>
+<option>Aggressive</option>
+<option>Defensive</option>
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= MULTIPLAYER ================= -->
+
+<section id="multiplayer" class="page">
+
+<h1 class="page-title">🎮 1v1 Multiplayer</h1>
+<p class="page-subtitle">Find opponents and compete in community matches.</p>
+
+<div class="stats">
+
+<div class="stat-card">
+<div class="stat-icon">🟢</div>
+<div class="stat-number">48</div>
+<div class="stat-label">Players Online</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">⚔️</div>
+<div class="stat-number">12</div>
+<div class="stat-label">Matches Live</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 style="margin-bottom:10px;">Find an Opponent</h2>
+
+<p style="color:#8491a3;margin-bottom:20px;">
+Create a challenge and find another eFootball player.
+</p>
+
+<button class="primary" onclick="alert('Matchmaking search started!')">
+⚡ Find Opponent
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= COINS ================= -->
+
+<section id="coins" class="page">
+
+<h1 class="page-title">🪙 Coins & Rewards</h1>
+<p class="page-subtitle">Earn community coins through tournaments and events.</p>
+
+<div class="card coin-box">
+
+<div class="coin">🪙</div>
+
+<div class="coin-count" id="coinBalance">1,250</div>
+
+<p style="color:#8996a8;margin:8px 0 25px;">Your current community coin balance</p>
+
+<button class="primary" onclick="claimDaily()">🎁 Claim Daily Reward</button>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-head">
+<h2>Ways to Earn</h2>
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+<div class="stat-icon">🏆</div>
+<div class="stat-number">+500</div>
+<div class="stat-label">Tournament Winner</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🥈</div>
+<div class="stat-number">+250</div>
+<div class="stat-label">Tournament Runner-up</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🎮</div>
+<div class="stat-number">+50</div>
+<div class="stat-label">Match Completed</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">📅</div>
+<div class="stat-number">+25</div>
+<div class="stat-label">Daily Login</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="page">
+
+<h1 class="page-title">👤 My Profile</h1>
+<p class="page-subtitle">Manage your eFootball community account.</p>
+
+<div class="card">
+
+<div class="form-grid">
+
+<div>
+
+<div class="form-group">
+<label>Username</label>
+<input id="profileName">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="profileEmail" type="email">
+</div>
+
+<div class="form-group">
+<label>eFootball ID</label>
+<input placeholder="Enter your eFootball ID">
+</div>
+
+<button class="primary" onclick="saveProfile()">Save Profile</button>
+
+</div>
+
+<div>
+
+<div class="card">
+
+<h3 style="margin-bottom:15px;">Player Statistics</h3>
+
+<p style="color:#8996a8;line-height:2;">
+Matches: <b style="color:white;">18</b><br>
+Wins: <b style="color:#18d66b;">13</b><br>
+Losses: <b style="color:#f07474;">5</b><br>
+Win Rate: <b style="color:white;">72%</b><br>
+Rank: <b style="color:#18d66b;">#47</b>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section id="admin" class="page">
+
+<h1 class="page-title">⚙️ Admin Panel</h1>
+<p class="page-subtitle">Manage tournaments, players and results.</p>
+
+<div class="stats">
+
+<div class="stat-card">
+<div class="stat-icon">👥</div>
+<div class="stat-number">1,284</div>
+<div class="stat-label">Players</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🏆</div>
+<div class="stat-number">8</div>
+<div class="stat-label">Tournaments</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🎮</div>
+<div class="stat-number">342</div>
+<div class="stat-label">Matches</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">📨</div>
+<div class="stat-number">86</div>
+<div class="stat-label">Registrations</div>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 style="margin-bottom:18px;">Create Tournament</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Tournament Name</label>
+<input id="newTournament" placeholder="Tournament name">
+</div>
+
+<div class="form-group">
+<label>Format</label>
+<select>
+<option>1v1</option>
+<option>League</option>
+<option>Knockout</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Maximum Players</label>
+<input type="number" placeholder="32">
+</div>
+
+<div class="form-group">
+<label>Prize Coins</label>
+<input type="number" placeholder="5000">
+</div>
+
+</div>
+
+<button class="primary" onclick="createTournament()">Create Tournament</button>
+
+</div>
+
+
+<div class="card section">
+
+<h2 style="margin-bottom:18px;">Communication</h2>
+
+<p style="color:#8996a8;margin-bottom:15px;">
+Send tournament information to registered players.
+</p>
+
+<button class="primary" onclick="sendWhatsApp()">
+💬 WhatsApp
+</button>
+
+<button class="secondary" onclick="sendEmail()">
+📧 Email
+</button>
+
+</div>
+
+</section>
+
+</main>
+</div>
+
+
+<!-- ================= REGISTRATION MODAL ================= -->
+
+<div id="registerModal" class="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<h2>🏆 Tournament Registration</h2>
+
+<p id="selectedTournament"
+style="color:#18d66b;margin:8px 0 20px;"></p>
+
+<div class="form-group">
+<label>Player Name</label>
+<input id="regName" placeholder="Your username">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="regEmail" type="email" placeholder="Your email">
+</div>
+
+<div class="form-group">
+<label>eFootball User ID</label>
+<input id="regId" placeholder="Your eFootball ID">
+</div>
+
+<div class="form-group">
+<label>WhatsApp Number</label>
+<input id="regWhatsapp" placeholder="+234...">
+</div>
+
+<button class="primary" style="width:100%;" onclick="submitRegistration()">
+REGISTER FOR TOURNAMENT
+</button>
+
+<p id="regMessage"
+style="text-align:center;margin-top:13px;color:#18d66b;"></p>
+
+</div>
+</div>
+
+
+<script>
+
+/* ================= DATA ================= */
+
+let currentUser = JSON.parse(localStorage.getItem("efootballUser"));
+
+/* ================= STARTUP ================= */
+
+window.onload = function(){
+
+if(currentUser){
+    showApp();
+}
+
+};
+
+/* ================= AUTH ================= */
+
+function showLogin(){
+
+document.getElementById("loginForm").classList.remove("hidden");
+document.getElementById("signupForm").classList.add("hidden");
+
+}
+
+function showSignup(){
+
+document.getElementById("loginForm").classList.add("hidden");
+document.getElementById("signupForm").classList.remove("hidden");
+
+}
+
+function signup(){
+
+let name=document.getElementById("signupName").value.trim();
+let email=document.getElementById("signupEmail").value.trim();
+let password=document.getElementById("signupPassword").value;
+
+if(!name || !email || !password){
+
+document.getElementById("signupMessage").style.color="#f07474";
+document.getElementById("signupMessage").textContent="Please fill in all fields.";
+return;
+
+}
+
+let user={
+name:name,
+email:email,
+password:password,
+coins:1250
+};
+
+localStorage.setItem("efootballUser",JSON.stringify(user));
+
+currentUser=user;
+
+document.getElementById("signupMessage").textContent="Account created!";
+
+setTimeout(showApp,600);
+
+}
+
+
+function login(){
+
+let email=document.getElementById("loginEmail").value.trim();
+let password=document.getElementById("loginPassword").value;
+
+let saved=JSON.parse(localStorage.getItem("efootballUser"));
+
+if(!saved){
+
+document.getElementById("loginMessage").textContent=
+"No account found. Please sign up first.";
+return;
+
+}
+
+if(saved.email===email && saved.password===password){
+
+currentUser=saved;
+showApp();
+
+}else{
+
+document.getElementById("loginMessage").textContent=
+"Incorrect email or password.";
+
+}
+
+}
+
+
+function logout(){
+
+localStorage.removeItem("efootballUser");
+currentUser=null;
+
+location.reload();
+
+}
+
+
+function showApp(){
+
+document.getElementById("authScreen").classList.add("hidden");
+document.getElementById("app").classList.remove("hidden");
+
+if(currentUser){
+
+document.getElementById("headerUser").textContent=
+"👤 "+currentUser.name;
+
+document.getElementById("profileName").value=
+currentUser.name;
+
+document.getElementById("profileEmail").value=
+currentUser.email;
+
+document.getElementById("coinBalance").textContent=
+(currentUser.coins || 1250).toLocaleString();
+
+}
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+function openPage(id,button){
+
+document.querySelectorAll(".page").forEach(page=>{
+page.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+if(button){
+button.classList.add("active");
+}
+
+window.scrollTo(0,0);
+
+}
+
+
+function openPageById(id){
+
+document.querySelectorAll(".page").forEach(page=>{
+page.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+window.scrollTo(0,0);
+
+}
+
+
+function toggleSidebar(){
+
+let sidebar=document.getElementById("sidebar");
+
+if(sidebar.style.display==="block"){
+sidebar.style.display="none";
+}else{
+sidebar.style.display="block";
+}
+
+}
+
+
+/* ================= TOURNAMENT ================= */
+
+function registerTournament(name){
+
+document.getElementById("selectedTournament").textContent=
+"Registering for: "+name;
+
+document.getElementById("regMessage").textContent="";
+
+if(currentUser){
+
+document.getElementById("regName").value=currentUser.name;
+document.getElementById("regEmail").value=currentUser.email;
+
+}
+
+document.getElementById("registerModal").classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("registerModal").classList.remove("show");
+
+}
+
+
+function submitRegistration(){
+
+let name=document.getElementById("regName").value.trim();
+let email=document.getElementById("regEmail").value.trim();
+let id=document.getElementById("regId").value.trim();
+let whatsapp=document.getElementById("regWhatsapp").value.trim();
+
+if(!name || !email || !id || !whatsapp){
+
+document.getElementById("regMessage").style.color="#f07474";
+document.getElementById("regMessage").textContent=
+"Please complete all fields.";
+
+return;
+
+}
+
+let registration={
+tournament:document.getElementById("selectedTournament").textContent,
+name:name,
+email:email,
+efootballId:id,
+whatsapp:whatsapp,
+date:new Date().toLocaleString()
+};
+
+let registrations=
+JSON.parse(localStorage.getItem("registrations") || "[]");
+
+registrations.push(registration);
+
+localStorage.setItem(
+"registrations",
+JSON.stringify(registrations)
+);
+
+document.getElementById("regMessage").style.color="#18d66b";
+
+document.getElementById("regMessage").textContent=
+"Registration successful!";
+
+setTimeout(closeModal,1200);
+
+}
+
+
+/* ================= COINS ================= */
+
+function claimDaily(){
+
+if(!currentUser) return;
+
+let today=new Date().toDateString();
+
+let lastClaim=localStorage.getItem("lastCoinClaim");
+
+if(lastClaim===today){
+
+alert("You already claimed today's reward.");
+
+return;
+
+}
+
+currentUser.coins=(currentUser.coins || 1250)+25;
+
+localStorage.setItem(
+"efootballUser",
+JSON.stringify(currentUser)
+);
+
+localStorage.setItem("lastCoinClaim",today);
+
+document.getElementById("coinBalance").textContent=
+currentUser.coins.toLocaleString();
+
+alert("+25 coins added!");
+
+}
+
+
+/* ================= PROFILE ================= */
+
+function saveProfile(){
+
+let name=document.getElementById("profileName").value.trim();
+
+if(!name){
+
+alert("Enter a username.");
+return;
+
+}
+
+currentUser.name=name;
+
+localStorage.setItem(
+"efootballUser",
+JSON.stringify(currentUser)
+);
+
+document.getElementById("headerUser").textContent=
+"👤 "+name;
+
+alert("Profile saved!");
+
+}
+
+
+/* ================= ADMIN ================= */
+
+function createTournament(){
+
+let name=document.getElementById("newTournament").value.trim();
+
+if(!name){
+
+alert("Enter a tournament name.");
+return;
+
+}
+
+alert(
+"Tournament '"+name+"' created successfully in prototype mode."
+);
+
+document.getElementById("newTournament").value="";
+
+}
+
+
+function sendWhatsApp(){
+
+alert(
+"WhatsApp integration will be connected when the website backend/API is added."
+);
+
+}
+
+
+function sendEmail(){
+
+alert(
+"Email integration will be connected when the website backend/email service is added."
+);
+
+}
+
+</script>
+
+</body>
+</html>
